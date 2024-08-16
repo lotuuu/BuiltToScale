@@ -1,16 +1,15 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Turret : MonoBehaviour
 {
+    [SerializeField] float moveSpeed = 20f;
     Vector2 moveInput;
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float fireCooldown = 5f;
 
     new Rigidbody2D rigidbody2D;
     new Collider2D collider2D;
 
-    float fireTimer = 0f;
     bool isGrounded = true;
 
     void Start()
@@ -53,6 +52,10 @@ public class Turret : MonoBehaviour
 
     // Fire
 
+    [SerializeField] float fireCooldown = 5f;
+    [SerializeField] GameObject bulletPrefab;
+    float fireTimer = 0f;
+
     void HandleFire()
     {
         fireTimer -= Time.deltaTime;
@@ -65,6 +68,31 @@ public class Turret : MonoBehaviour
 
     void Fire()
     {
-        // Debug.Log("Firing!");
+        Enemy target = FindNearestEnemy();
+        if (target == null)
+            return;
+
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Bullet bulletComponent = bullet.GetComponent<Bullet>();
+        bulletComponent.Init(target);
+    }
+
+    Enemy FindNearestEnemy()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Debug.Log(enemies.Length);
+
+        Enemy nearestEnemy = null;
+        float nearestDistance = Mathf.Infinity;
+        foreach (Enemy enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestEnemy = enemy;
+            }
+        }
+        return nearestEnemy;
     }
 }

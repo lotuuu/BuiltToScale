@@ -68,6 +68,8 @@
     <Compile Include="Assets/Scripts/Enemy.cs" />
     <Compile Include="Assets/Scripts/Builder.cs" />
     <Compile Include="Assets/InputHandler.cs" />
+    <Compile Include="Assets/EnemySpawner.cs" />
+    <Compile Include="Assets/Bullet.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

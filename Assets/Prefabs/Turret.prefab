@@ -173,3 +173,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   fireCooldown: 5
+  bulletPrefab: {fileID: 364031584554063301, guid: 4db1114e8016a4c928404e0890c1c59d, type: 3}
