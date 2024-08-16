@@ -7,13 +7,30 @@ public class Builder : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
 
     new Rigidbody2D rigidbody2D;
+    new Collider2D collider2D;
+    bool isGrounded = true;
 
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
+        collider2D = GetComponent<Collider2D>();
     }
 
     void FixedUpdate()
+    {
+        HandleIsGrounded();
+        HandleMovement();
+    }
+
+    void HandleIsGrounded()
+    {
+        Vector3 position = collider2D.bounds.center - new Vector3(0, collider2D.bounds.extents.y, 0);
+        RaycastHit2D hit = Physics2D.Raycast(position, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+        Debug.DrawLine(position, position + Vector3.down * 0.1f, Color.red);
+        isGrounded = hit.collider != null;
+    }
+
+    void HandleMovement()
     {
         Vector2 newVelocity = new(moveInput.x * moveSpeed, rigidbody2D.velocity.y);
         rigidbody2D.velocity = newVelocity;
@@ -21,12 +38,12 @@ public class Builder : MonoBehaviour
 
     public void Move(InputValue inputValue)
     {
-        Debug.Log("OnMoveBuilder input received");
         moveInput = inputValue.Get<Vector2>();
     }
 
     public void Jump()
     {
-        rigidbody2D.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+        if (isGrounded)
+            rigidbody2D.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
     }
 }
