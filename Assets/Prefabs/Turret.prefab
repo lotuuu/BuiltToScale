@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8450147024068140240}
   - component: {fileID: 5430362434927797029}
-  - component: {fileID: 3275951307589704825}
   - component: {fileID: 2954742936276902661}
   - component: {fileID: 3939592967349015510}
   - component: {fileID: 8146382325699227583}
@@ -88,44 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3275951307589704825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093755737066338362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 75b57220786db42cb9ec65d2df984f04, type: 3}
-  m_NotificationBehavior: 1
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 91101e7a-975f-4d76-a68f-450747cab81f
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: edb4f320-347c-4169-bd9c-e0ea28b65c58
-    m_ActionName: Player/Fire[/Mouse/leftButton]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Turret
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!50 &2954742936276902661
 Rigidbody2D:
   serializedVersion: 4

@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets/Scripts/Turret.cs" />
-    <Compile Include="Assets/Enemy.cs" />
+    <Compile Include="Assets/Scripts/Enemy.cs" />
     <Compile Include="Assets/Scripts/Builder.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -929,8 +929,6 @@
     <ProjectReference Include="UnityEngine.UI.csproj" />
     <ProjectReference Include="Unity.2D.Tilemap.Extras.Editor.csproj" />
     <ProjectReference Include="Unity.Timeline.csproj" />
-    <ProjectReference Include="Unity.InputSystem.csproj" />
-    <ProjectReference Include="Unity.InputSystem.ForUI.csproj" />
     <ProjectReference Include="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
     <ProjectReference Include="Unity.Collections.csproj" />
     <ProjectReference Include="Unity.2D.Psdimporter.Editor.csproj" />
