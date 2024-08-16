@@ -1,10 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Builder : MonoBehaviour
 {
+    Vector2 moveInput;
     [SerializeField] float moveSpeed = 5f;
-    float horizontalInput;
-    bool jumpInput;
 
     new Rigidbody2D rigidbody2D;
 
@@ -15,34 +15,18 @@ public class Builder : MonoBehaviour
 
     void FixedUpdate()
     {
-        GatherInput();
-        HandleMovement();
-        HandleJump();
-    }
-
-    void HandleMovement()
-    {
-        Vector2 newVelocity = new(horizontalInput * moveSpeed, rigidbody2D.velocity.y);
+        Vector2 newVelocity = new(moveInput.x * moveSpeed, rigidbody2D.velocity.y);
         rigidbody2D.velocity = newVelocity;
     }
 
-    void HandleJump()
+    public void Move(InputValue inputValue)
     {
-        if (jumpInput)
-        {
-            Jump();
-            jumpInput = false;
-        }
+        Debug.Log("OnMoveBuilder input received");
+        moveInput = inputValue.Get<Vector2>();
     }
 
-    void Jump()
+    public void Jump()
     {
-        // Debug.Log("Jumping!");
-    }
-
-    void GatherInput()
-    {
-        horizontalInput = Input.GetAxis("HorizontalBuilder");
-        jumpInput = Input.GetButtonDown("JumpBuilder");
+        rigidbody2D.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
     }
 }

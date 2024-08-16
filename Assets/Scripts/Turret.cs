@@ -1,15 +1,15 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Turret : MonoBehaviour
 {
+    Vector2 moveInput;
     [SerializeField] float moveSpeed = 5f;
-    float horizontalInput;
-    bool jumpInput;
+    [SerializeField] float fireCooldown = 5f;
 
     new Rigidbody2D rigidbody2D;
 
-    [SerializeField] float fireCooldown = 5f;
-    float fireTimer;
+    float fireTimer = 0f;
 
     void Start()
     {
@@ -18,31 +18,20 @@ public class Turret : MonoBehaviour
 
     void FixedUpdate()
     {
-        GatherInput();
         HandleMovement();
-        HandleJump();
         HandleFire();
     }
 
     void HandleMovement()
     {
-        Vector2 newVelocity = new(horizontalInput * moveSpeed, rigidbody2D.velocity.y);
+        Vector2 newVelocity = new(moveInput.x * moveSpeed, rigidbody2D.velocity.y);
         rigidbody2D.velocity = newVelocity;
-    }
-
-    void HandleJump()
-    {
-        if (jumpInput)
-        {
-            Jump();
-            jumpInput = false;
-        }
     }
 
     void HandleFire()
     {
         fireTimer -= Time.deltaTime;
-        if (fireTimer <= 0)
+        if (fireTimer <= 0f)
         {
             Fire();
             fireTimer = fireCooldown;
@@ -51,17 +40,17 @@ public class Turret : MonoBehaviour
 
     void Fire()
     {
-        // Debug.Log("Firing!");
+        Debug.Log("Firing!");
     }
 
-    void Jump()
+    public void Move(InputValue inputValue)
     {
-        // Debug.Log("Jumping!");
+        Debug.Log("Move input received");
+        moveInput = inputValue.Get<Vector2>();
     }
 
-    void GatherInput()
+    public void Jump()
     {
-        horizontalInput = Input.GetAxis("HorizontalTurret");
-        jumpInput = Input.GetButtonDown("JumpTurret");
+        rigidbody2D.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
     }
 }
