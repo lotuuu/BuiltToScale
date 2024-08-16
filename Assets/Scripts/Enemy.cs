@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] float moveSpeed = 1f;
+    public int damage = 10;
+    Builder builder;
+
     void Start()
     {
-        
+        builder = FindObjectOfType<Builder>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        HandleMovement();
+    }
+
+    void HandleMovement()
+    {
+        // Chase builder
+        Vector3 direction = builder.transform.position - transform.position;
+        Vector3 normalizedDirection = direction.normalized;
+        transform.position += moveSpeed * Time.fixedDeltaTime * normalizedDirection;
     }
 }

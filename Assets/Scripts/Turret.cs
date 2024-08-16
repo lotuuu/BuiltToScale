@@ -16,7 +16,7 @@ public class Turret : MonoBehaviour
     void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
+        collider2D = GetComponent<BoxCollider2D>();
     }
 
     void FixedUpdate()

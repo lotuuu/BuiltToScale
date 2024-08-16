@@ -8,16 +8,22 @@ public class Builder : MonoBehaviour
 
     new Rigidbody2D rigidbody2D;
     new Collider2D collider2D;
+    SpriteRenderer spriteRenderer;
     bool isGrounded = true;
+
 
     void Start()
     {
+        health = maxHealth;
         rigidbody2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<Collider2D>();
+        collider2D = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        baseColor = spriteRenderer.color;
     }
 
     void FixedUpdate()
     {
+        HandleImmunity();
         HandleIsGrounded();
         HandleMovement();
     }
@@ -45,5 +51,53 @@ public class Builder : MonoBehaviour
     {
         if (isGrounded)
             rigidbody2D.AddForce(Vector2.up * 20f, ForceMode2D.Impulse);
+    }
+
+    // Health
+
+    [SerializeField] int maxHealth = 100;
+    int health;
+
+    [SerializeField] float immunityDuration = 1f;
+    float immunityTimer = 0f;
+    bool isImmune;
+
+    Color baseColor;
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            ReceiveDamage(enemy.damage);
+            if (health <= 0)
+            {
+                Debug.Log("Died");
+            }
+        }
+    }
+
+    void ReceiveDamage(int damage)
+    {
+        if (isImmune)
+            return;
+
+        health -= damage;
+        isImmune = true;
+        immunityTimer = immunityDuration;
+        spriteRenderer.color = new Color(1, 0, 0, 0.5f);
+    }
+
+    void HandleImmunity()
+    {
+        if (isImmune)
+        {
+            immunityTimer -= Time.deltaTime;
+            if (immunityTimer <= 0f)
+            {
+                isImmune = false;
+                spriteRenderer.color = baseColor;
+            }
+        }
     }
 }
