@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed = 10f;
+    [SerializeField] float speed = 15f;
     [SerializeField] float lifeTime = 99f;
-    [SerializeField] int damage = 10;
+    [SerializeField] int damage = 4;
 
     new Rigidbody2D rigidbody2D;
     Enemy target;

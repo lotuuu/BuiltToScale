@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8450147024068140240}
+  - component: {fileID: 8146382325699227583}
   - component: {fileID: 5430362434927797029}
   - component: {fileID: 2954742936276902661}
   - component: {fileID: 3939592967349015510}
-  - component: {fileID: 8146382325699227583}
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -35,6 +35,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8146382325699227583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093755737066338362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d31e99594e2e45668867ba973a71951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  fireCooldown: 2
+  bulletPrefab: {fileID: 364031584554063301, guid: 4db1114e8016a4c928404e0890c1c59d, type: 3}
 --- !u!212 &5430362434927797029
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,18 +174,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8146382325699227583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093755737066338362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d31e99594e2e45668867ba973a71951, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  fireCooldown: 5
-  bulletPrefab: {fileID: 364031584554063301, guid: 4db1114e8016a4c928404e0890c1c59d, type: 3}

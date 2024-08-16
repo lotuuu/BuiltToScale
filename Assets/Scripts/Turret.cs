@@ -1,14 +1,15 @@
-using UnityEditor;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Turret : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 20f;
+    [SerializeField] float moveSpeed = 10f;
     Vector2 moveInput;
 
     new Rigidbody2D rigidbody2D;
     new Collider2D collider2D;
+    EnemiesTracker enemiesTracker;
 
     bool isGrounded = true;
 
@@ -16,6 +17,7 @@ public class Turret : MonoBehaviour
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<BoxCollider2D>();
+        enemiesTracker = FindObjectOfType<EnemiesTracker>();
     }
 
     void FixedUpdate()
@@ -52,7 +54,7 @@ public class Turret : MonoBehaviour
 
     // Fire
 
-    [SerializeField] float fireCooldown = 5f;
+    [SerializeField] float fireCooldown = 2f;
     [SerializeField] GameObject bulletPrefab;
     float fireTimer = 0f;
 
@@ -79,8 +81,7 @@ public class Turret : MonoBehaviour
 
     Enemy FindNearestEnemy()
     {
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        Debug.Log(enemies.Length);
+        List<Enemy> enemies = enemiesTracker.Enemies;
 
         Enemy nearestEnemy = null;
         float nearestDistance = Mathf.Infinity;

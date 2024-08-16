@@ -8,10 +8,14 @@ public class Enemy : MonoBehaviour
     public int damage = 10;
     Builder builder;
 
+    public static event System.Action<Enemy> OnEnemySpawned;
+    public static event System.Action<Enemy> OnEnemyDestroyed;
+
     void Start()
     {
         health = maxHealth;
         builder = FindObjectOfType<Builder>();
+        OnEnemySpawned?.Invoke(this);
     }
 
     void FixedUpdate()
@@ -29,8 +33,13 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("Enemy took damage: " + damage);
         health -= damage;
+        Debug.Log("Enemy health: " + health);
         if (health <= 0)
+        {
+            OnEnemyDestroyed?.Invoke(this);
             Destroy(gameObject);
+        }
     }
 }
